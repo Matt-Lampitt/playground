@@ -63,7 +63,7 @@ class AddManager(models.Manager):
 
 
 class Add(models.Model):
-    header_image = models.ImageField(null=True, blank=True, upload_to='images/')
+    header_image = models.ImageField(null=True, blank=True, default="default.jpeg")
     name = models.CharField(max_length=255)
     desc = models.TextField(blank=True, null=True)
     age = models.CharField(max_length=255)

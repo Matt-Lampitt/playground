@@ -44,11 +44,11 @@
                     {% csrf_token %}
                     <div class="col-md-9">
                         <label for="exampleFormControlInput1">Name</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Toy's name">
+                        <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="Toy's name">
                     </div>
                     <div class="col-md-3">
                         <label for="exampleFormControlSelect1">Age</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
+                        <select class="form-control" name="age" id="exampleFormControlSelect1">
                             <option>3</option>
                             <option>4</option>
                             <option>5</option>
@@ -60,11 +60,11 @@
                     </div>
                     <div class="col-md-9">
                         <label for="exampleFormControlInput1">City</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1">
+                        <input type="text" name="city" class="form-control" id="exampleFormControlInput1">
                     </div>
                     <div class="col-md-3">
                         <label for="exampleFormControlSelect1">Condition</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
+                        <select class="form-control" name="condition" id="exampleFormControlSelect1">
                             <option>Fair</option>
                             <option>Good</option>
                             <option>Very good</option>
@@ -73,11 +73,11 @@
                     </div>
                     <div class="col-md-12">
                         <label for="exampleFormControlTextarea1">Description</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control" name="desc" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Image</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        <input type="file" name="header_image" class="form-control-file" id="exampleFormControlFile1" accept="image/*">
                     </div>
                     <div class="col-12 mt-3">
                         <button type="submit" class="btn btn-success">Create</button>
@@ -106,9 +106,11 @@
                     <td>{{ add.city }}</td>
                     <td>{{ add.condition }}</td>
                     <td>{{ add.desc }}</td>
-                    <td><img src="{{ add.header_image.url }}" alt="toysPic"></td>
+                    {% if add.header_image %}
+                        <td><img style="height: 100px;" src="{{ add.header_image.url }}" alt="toysPic"></td>
+                    {% endif %}
                     {% if add.creator.id == request.session.user_id %}
-                        <td><a href="/delete/{{ add.id }}">Delete Add</a></td>
+                        <td><a href="/delete/{{ add.id }}">Delete</a></td>
                     {% endif %}
                 </tr>
                 {% endfor %}
